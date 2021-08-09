@@ -64,7 +64,7 @@ const Blackjack = () => {
     } else if (gameState === "opponentTurn") {
       console.log("opponentTurn");
       let pile = [takeCardfromDeck(), takeCardfromDeck()];
-      while (getTotal(pile) < 18) pile = [...pile, takeCardfromDeck()];
+      while (getTotal(pile) < 17) pile = [...pile, takeCardfromDeck()];
       setOpponentCards(pile);
     } else if (gameState === "yourTurn") {
       console.log("yourTurn");
@@ -194,7 +194,6 @@ const StyledGameScreen = styled.div`
 `;
 
 const StyledButtonSection = styled.div`
-  ${(props) => props.isMobile && "width: 100%;"}
   display: flex;
   flex-direction: column;
 `;

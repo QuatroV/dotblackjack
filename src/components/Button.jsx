@@ -12,11 +12,10 @@ const Button = styled.button`
   box-shadow: 0px 7px 38px -6px rgba(34, 60, 80, 0.57);
   ${(props) => (props.isMobile ? "width: 100%" : "max-width:190px;")};
   ${(props) => props.isMobile && "font-size:50px; padding: 40px;"};
-  :active {
-    -webkit-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;
-    -moz-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;
-    box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;
-  }
+  ${(props) =>
+    !props.isMobile &&
+    ":active {-webkit-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;-moz-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset"};
+  } 
 `;
 
 export default Button;

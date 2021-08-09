@@ -3,8 +3,9 @@ import styled from "styled-components";
 const StyledWrapper = styled.div`
   font-family: "Quicksand", sans-serif;
   border-radius: ${(props) => (props.isMobile ? "10px" : "5px")};
-  padding: ${(props) => (props.isMobile ? "36px" : "16px")};
-  min-width: ${(props) => (props.isMobile ? "100%" : "700px")};
+  padding: 16px;
+  margin: 16px;
+  ${(props) => (props.isMobile ? "height: 75vh" : "min-width:700px")};
   background-color: WhiteSmoke;
   -webkit-box-shadow: 10px 7px 20px 3px rgba(34, 60, 80, 0.34);
   -moz-box-shadow: 10px 7px 20px 3px rgba(34, 60, 80, 0.34);
