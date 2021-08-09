@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Button = styled.button`
   border: none;
-  border-radius: 3px;
+  border-radius: ${(props) => (props.isMobile ? "10px" : "5px")};
   margin: 5px;
   padding: 15px 32px;
   font-family: "Quicksand", sans-serif;
@@ -10,9 +10,12 @@ const Button = styled.button`
   -webkit-box-shadow: 0px 7px 38px -6px rgba(34, 60, 80, 0.57);
   -moz-box-shadow: 0px 7px 38px -6px rgba(34, 60, 80, 0.57);
   box-shadow: 0px 7px 38px -6px rgba(34, 60, 80, 0.57);
-  max-width: 190px;
+  ${(props) => (props.isMobile ? "width: 100%" : "max-width:190px;")};
+  ${(props) => props.isMobile && "font-size:50px; padding: 40px;"};
   :active {
-    background-color: darkGray;
+    -webkit-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;
+    -moz-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;
+    box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.74) inset;
   }
 `;
 

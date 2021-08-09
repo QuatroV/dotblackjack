@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 const CardListElement = styled.li`
   display: block;
-  float: left;
+  ${(props) => (props.isMobile ? "float: left" : "float: left")}
   margin-right: 10px;
-  width: 100px;
+  width: ${(props) => (props.isMobile ? "100%" : "100px")};
+  align-content: center;
 `;
 
 export default CardListElement;

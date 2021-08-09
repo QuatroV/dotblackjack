@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { isMobile } from "react-device-detect";
 
 import EndgameMessage from "../components/EndgameMessage";
 
@@ -81,18 +82,21 @@ const Blackjack = () => {
         Welcome to simple blackjack game! Press the "Start Game" button to
         begin.
       </StyledText>
-      <Button onClick={startGame}>Start Game</Button>
+      <Button isMobile={isMobile} onClick={startGame}>
+        Start Game
+      </Button>
     </StyledGameScreen>
   );
 
   const GameScreen = (
     <StyledGameScreen>
       Your total is {yourTotal}. Your cards are:
-      <CardList>
+      <CardList isMobile={isMobile}>
         {yourCards.map((card) => (
-          <CardListElement key={card.name}>
+          <CardListElement isMobile={isMobile} key={card.name}>
             <StyledImg
               src={card.icon}
+              isMobile={isMobile}
               alt=""
               onClick={
                 card.variableValue
@@ -107,30 +111,40 @@ const Blackjack = () => {
                   : null
               }
             />
-            {card.name}
+            {!isMobile && card.name}
           </CardListElement>
         ))}
       </CardList>
       {showHands ? (
         <>
           Oppponent total is {opponentTotal}. Opponents cards are:
-          <CardList>
+          <CardList isMobile={isMobile}>
             {opponentCards.map((card) => (
-              <CardListElement key={card.name}>
-                <img src={card.icon} alt="" /> <br />
-                {card.name}
+              <CardListElement isMobile={isMobile} key={card.name}>
+                <StyledImg isMobile={isMobile} src={card.icon} alt="" /> <br />
+                {!isMobile && card.name}
               </CardListElement>
             ))}
           </CardList>
-          <EndgameMessage yourTotal={yourTotal} opponentTotal={opponentTotal} />
-          <Button onClick={startGame}>New game</Button>
+          <EndgameMessage
+            isMobile={isMobile}
+            yourTotal={yourTotal}
+            opponentTotal={opponentTotal}
+          />
+          <Button isMobile={isMobile} onClick={startGame}>
+            New game
+          </Button>
         </>
       ) : (
-        <StyledButtonSection>
+        <StyledButtonSection isMobile={isMobile}>
           {!isYouOverdrawn && (
-            <Button onClick={addCardToYourPile}>Take another card</Button>
+            <Button isMobile={isMobile} onClick={addCardToYourPile}>
+              Take another card
+            </Button>
           )}
-          <Button onClick={showCards}>Open hand</Button>
+          <Button isMobile={isMobile} onClick={showCards}>
+            Open hand
+          </Button>
         </StyledButtonSection>
       )}
     </StyledGameScreen>
@@ -149,14 +163,16 @@ const Blackjack = () => {
 
   return (
     <StyledContainer>
-      <MainTitle>dotBlackjack</MainTitle>
-      <StyledMoneyBar>Your money: {money}$</StyledMoneyBar>
-      <StyledWrapper>{SwitchBetweenScreens()}</StyledWrapper>
+      <MainTitle isMobile={isMobile}>dotBlackjack</MainTitle>
+      <StyledWrapper isMobile={isMobile}>
+        {SwitchBetweenScreens()}
+      </StyledWrapper>
     </StyledContainer>
   );
 };
 
 const StyledImg = styled.img`
+  ${(props) => props.isMobile && "height: 200px"}
   display: block;
 `;
 
@@ -178,24 +194,9 @@ const StyledGameScreen = styled.div`
 `;
 
 const StyledButtonSection = styled.div`
+  ${(props) => props.isMobile && "width: 100%;"}
   display: flex;
   flex-direction: column;
-`;
-
-const StyledMoneyBar = styled.div`
-  padding: 8px;
-  border-radius: 3px;
-  display: block;
-  margin-top: 0px;
-  margin-bottom: 8px;
-  min-width: 200px;
-  max-width: 400px;
-  text-align: center;
-  background-color: WhiteSmoke;
-  -webkit-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.57);
-  -moz-box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.57);
-  box-shadow: 0px 5px 38px -6px rgba(34, 60, 80, 0.57);
-  font-family: "Quicksand", sans-serif;
 `;
 
 export default Blackjack;
